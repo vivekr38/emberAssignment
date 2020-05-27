@@ -1,0 +1,54 @@
+{{yield}}
+<!--<ul class="list-group list-group-flush">
+  {{#each patients as |patient|}}
+  <li class="list-group-item">
+    <LinkTo @route="patient" @model={{patient.id}}>{{patient.name}}</LinkTo>
+    {{!-- <span class="label label-primary">View</span> --}}
+    <span class="label label-danger pull-right" {{on "click" (fn this.deletePatient patient.id)}}>Delete</span>
+  </li>
+  {{/each}}
+</ul>-->
+<div>
+  <EmberTable as |t|>
+    <t.head @columns={{columns}} as |h|>
+      <h.row as |r|>
+        <r.cell as |column|>
+          <h3>{{column.name}}</h3>
+        </r.cell>
+      </h.row>
+    </t.head>
+
+    <t.body @rows={{rows}} as |b|>
+      <b.row as |r|>
+        <r.cell as |value|>
+          {{#each patients as |patient|}}
+          <div class="list-group-item">
+            <h5>{{patient.name}}</h5>
+          </div>
+          {{/each}}
+        </r.cell>
+        <r.cell as |value|>
+          {{#each patients as |patient|}}
+          <div class="list-group-item">
+            <span class="btn btn-success" {{on "click" (fn this.viewPatient patient.id)}}>View</span>
+          </div>
+          {{/each}}
+        </r.cell>
+        <r.cell as |value|>
+          {{#each patients as |patient|}}
+          <div class="list-group-item">
+            <span class="btn btn-info" {{on "click" (fn this.editPatient patient.id)}}>Edit</span>
+          </div>
+          {{/each}}
+        </r.cell>
+        <r.cell as |value|>
+          {{#each patients as |patient|}}
+          <div class="list-group-item">
+            <span class="btn btn-danger" {{on "click" (fn this.deletePatient patient.id)}}>Delete</span>
+          </div>
+          {{/each}}
+        </r.cell>
+      </b.row>
+    </t.body>
+  </EmberTable>
+</div>
